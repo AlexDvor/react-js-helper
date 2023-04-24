@@ -1,16 +1,23 @@
-import { FC, FormEvent } from 'react'
+import { FC, FormEvent, useRef } from 'react'
 
 export const Form: FC = () => {
+	const formRef = useRef<HTMLFormElement>(null)
+
 	const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
 		const fields = Object.fromEntries(
 			new window.FormData(event.target as HTMLFormElement)
 		)
-		console.log('🚀 ~ fields:', fields)
+		// console.log('🚀 ~ fields:', fields)
+		// console.log('🚀 ~ formRef:', formRef)
 	}
 	return (
 		<>
-			<form onSubmit={handleSubmit} className='flex flex-col gap-3'>
+			<form
+				ref={formRef}
+				onSubmit={handleSubmit}
+				className='flex flex-col gap-3'
+			>
 				<input
 					name='name'
 					type='text'
